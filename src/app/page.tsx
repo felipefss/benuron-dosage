@@ -14,7 +14,7 @@ export default function Home() {
 
     const weight = parseInt(weightInputRef.current?.value as string);
 
-    const { dose, max } = calculateDosage(weight, interval as 6 | 8);
+    const { dose, max } = calculateDosage(weight, interval);
     setDose(dose);
     setMaxDose(max);
   }
@@ -53,14 +53,19 @@ export default function Home() {
       </form>
 
       {dose && (
-        <section className="mt-10 border border-solid p-4">
-          <h2 className="text-2xl mb-5 text-center">Resultados</h2>
+        <>
+          <section className="mt-10 border border-solid p-4">
+            <h2 className="text-2xl mb-5 text-center">Resultados</h2>
 
-          <div className="flex flex-col gap-2">
-            <span>Dose a administrar (ml): {dose}</span>
-            <span>Dose máxima diária (ml): {maxDose}</span>
-          </div>
-        </section>
+            <div className="flex flex-col gap-2">
+              <span>Dose a administrar (ml): {dose}*</span>
+              <span>Dose máxima diária (ml): {maxDose}</span>
+            </div>
+          </section>
+          <span className="text-xs mt-2">
+            *Valores somente indicativos. Sempre consulte o seu médico para os valores corretos
+          </span>
+        </>
       )}
     </main>
   );
