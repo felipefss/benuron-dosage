@@ -6,7 +6,7 @@ import { calculateDosage } from '@/utils/calculate-dosage';
 export default function Home() {
   const [dose, setDose] = useState<string | null>(null);
   const [maxDose, setMaxDose] = useState<number>(0);
-  const [interval, setInterval] = useState<6 | 8>(6);
+  const [doseInterval, setDoseInterval] = useState<6 | 8>(6);
   const weightInputRef = useRef<HTMLInputElement>(null);
 
   async function getDosage(event: FormEvent<HTMLFormElement>) {
@@ -14,13 +14,13 @@ export default function Home() {
 
     const weight = parseInt(weightInputRef.current?.value as string);
 
-    const { dose, max } = calculateDosage(weight, interval);
+    const { dose, max } = calculateDosage(weight, doseInterval);
     setDose(dose);
     setMaxDose(max);
   }
 
   function handleChangeInterval(event: ChangeEvent<HTMLInputElement>) {
-    setInterval(parseInt(event.target.value) as 6 | 8);
+    setDoseInterval(parseInt(event.target.value) as 6 | 8);
   }
 
   return (
@@ -37,13 +37,25 @@ export default function Home() {
           <span>Intervalo das dosagens:</span>
 
           <label>
-            <input type="radio" name="interval" value={6} checked={interval === 6} onChange={handleChangeInterval} /> 6
-            em 6 horas
+            <input
+              type="radio"
+              name="interval"
+              value={6}
+              checked={doseInterval === 6}
+              onChange={handleChangeInterval}
+            />{' '}
+            6 em 6 horas
           </label>
 
           <label>
-            <input type="radio" name="interval" value={8} checked={interval === 8} onChange={handleChangeInterval} /> 8
-            em 8 horas
+            <input
+              type="radio"
+              name="interval"
+              value={8}
+              checked={doseInterval === 8}
+              onChange={handleChangeInterval}
+            />{' '}
+            8 em 8 horas
           </label>
         </div>
 
